@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    form {
+      border: 2px solid black;
+      padding: 30px;
+      background-color: blueviolet;
+      border-radius: 20px;
+      width: 170px;
+      text-align: center;
+    }
+    div {
+      border: 2px solid black;
+      width: 200px;
+      height: 200px;
+      background-color: bisque;
+      padding: 20px;
+      align-content: center;
+      justify-content: center;
+    }
+  </style>
+
+  <body>
+    <form id="form">
+      <label for="username">Username</label>
+      <input type="text" id="name" name="username" /><br /><br />
+      <label for="mail">Email</label>
+      <input type="email" id="mail" name="mail" /><br /><br />
+      <label for="pwors">Password</label>
+      <input type="password" id="Password" name="pword" /><br /><br />
+      <input type="submit" />
+    </form>
+    <script>
+      let form = document.getElementById("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(e.target[0].value, e.target[1].value);
+        let name = e.target[0].value;
+        let email = e.target[1].value;
+        let userDetails = { username: name, email: email };
+        localStorage.setItem("userinfo", JSON.stringify(userDetails));
+        let existindData = localStorage.getItem("userinfo") || [];
+        let parseData = JSON.parse(existindData);
+        console.log(parseData);
+        let card = document.createElement("div");
+        document.body.append(card);
+        let username = document.createElement("h1");
+        let useremail = document.createElement("p");
+        username.innerHTML = parseData.username;
+        useremail.innerHTML = parseData.email;
+        card.append(username, useremail);
+      });
+    </script>
+  </body>
+</html>
